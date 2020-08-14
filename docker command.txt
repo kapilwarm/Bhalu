@@ -1,0 +1,221 @@
+
+
+
+
+
+
+
+
+docker-compose up
+docker-compose up --build
+
+docker-compose ps
+
+
+==========================
+
+docker
+
+docker --version
+docker -h
+
+running a conatiner
+------------------------------------------------
+docker run <imagename> 
+docker run busybox ls
+docker run busybox ping google.com
+docker run busybox echo hi there
+docker run -it busybox sh
+docker run -it stephgrinder/simpleweb sh
+docker run -p 8080:8080 <image id>
+
+
+show ruiing conatiner
+-------------------------------
+docker ps
+docker ps -all
+
+
+docker run = docker create + docker start 
+
+
+create a container 
+------------------------------
+docker create <imagename>
+
+
+start a container 
+----------------------------------------
+docker start <conatiner ID>
+docker start -a <container ID>
+
+
+
+image = fs snapshot + startup command 
+
+show conatiner logs
+-------------------------------
+docker logs <conatiner ID> 
+
+
+stop a conatiner
+-------------------------------
+docker stop <conatiner ID> 
+
+
+Kill a conatiner
+-----------------------------
+docker kill <conatiner ID> 
+
+
+
+
+remove stop container from machine
+---------------------------------------------
+docker system prune
+
+=========================================
+
+code .
+docker build .
+docker build -t stephgrinder/radis:latest
+
+
+
+docker file = from  <> + install depedency <> + CMD <>
+
+
+copy file from local machine to docker 
+-------------------------------------------------
+copy ./ ./ 
+
+application port mapping
+------------------------------------------
+docker run -p 8080:8080 <image id>
+
+
+
+execute addtional command in a conatiner
+---------------------------------------------------
+docker exec -it <conatiner ID> <command>
+
+docker exec -it <conatiner ID> <sh>
+
+add default commad to image 
+docker commit -c 'CMD["redis-server"]'
+
+
+docker run -p 8080:8081  -v $(pwd):/app <image id>
+
+docker run -p 8080:8081 -v /app/node_modules -v $(pwd):/app <image id>
+
+=================================================================
+=================================================================
+
+docker build -t myapp .
+
+docker run -d myapp
+
+docker ps
+
+docker stop container-name
+
+
+
+docker tag myapp gcr.io/myapp
+docker push gcr.io/my app
+
+delete image 
+---------------------------------------------
+docker  rmi
+docker rmi -f image busybox
+
+show current image in local repository
+--------------------------------------------------------
+docker images
+docker images
+
+port mapping on docker
+-------------------------------------
+docker run -d -p 8888:8888 myapp
+
+show running container
+-----------------------------------
+docker ps
+docker ps -all
+
+curl http://localhost:8888
+
+show container logs
+----------------------
+docker logs 
+docker logs container-name
+
+docker exce -it 
+
+tagging docker image
+------------------------------------
+docker tag myapp gcr.io /project
+
+
+pull image from docker hub
+-----------------------------------
+docker pull <image_name>
+
+===================================================================
+
+#Build an image from the Dockerfile in the
+#current directory and tag the image
+docker build -t myimage:1.0 .
+
+#List all images that are locally stored with
+#the Docker Engine
+docker image ls
+
+#Delete an image from the local image store
+docker image rm alpine:3.4
+
+
+
+Run a container from the Alpine version 3.9
+image, name the running container
+“web” and expose port 5000 externally,
+mapped to port 80 inside the container.
+docker container run --name web -p
+
+5000:80 alpine:3.9
+Stop a running container through SIGTERM
+docker container stop web
+
+Stop a running container through SIGKILL
+docker container kill web
+
+List the networks
+docker network ls
+
+Run
+List the running containers (add --all to
+include stopped containers)
+docker container ls
+
+Delete all running and stopped containers
+docker container rm -f $(docker ps -aq)
+
+Print the last 100
+lines of a container’s logs
+docker container
+
+logs --tail 100 web
+
+
+
+Pull an image from a registry
+docker pull myimage:1.0
+
+Retag a local image with a new image name
+and tag
+docker tag myimage:1.0 myrepo/
+
+myimage:2.0
+Push an image to a registry
+docker push myrepo/myimage:2.0 
